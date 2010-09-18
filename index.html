@@ -1,99 +1,50 @@
-<html>
-  <head>
-    <title>bost.ocks.org</title>
-    <script type="text/javascript" src="nns.min.js?1.1.0"></script>
-    <style type="text/css">
+---
+layout: default
+---
+<h1><a href="/">bost.ocks</a>.org</h1>
 
-body {
-  margin: 0;
+<style type="text/css">
+
+.section {
+  position: relative;
+  display: block;
+  width: 960px;
+  height: 240px;
+  border: solid 4px #ccc;
+  margin-bottom: 2em;
+  -webkit-border-top-right-radius: 40px;
+  -moz-border-radius-topright: 40px;
 }
 
-#center {
-  display: table;
-  height: 100%;
-  width: 100%;
+.section:hover {
+  text-decoration: none;
+  border-bottom-color: steeblue;
+}
+
+.section div {
   position: absolute;
-}
-
-#overlay {
-  display: table-cell;
-  vertical-align: middle;
-  text-align: center;
-  font: 300 120px Helvetica Neue;
-  color: white;
-  -webkit-text-stroke: 1px black;
-  -moz-text-stroke: 1px black;
+  top: 128px;
+  left: 14px;
+  font-size: 96px;
+  font-weight: 300;
+  color: #fff;
+  -webkit-text-stroke: 1px #000;
   text-shadow: 2px 2px 2px rgba(128, 128, 128, .4);
 }
 
-    </style>
-  </head>
-  <body>
-    <div id="center">
-      <div id="overlay">bost.ocks.org</div>
-    </div>
-    <script type="text/javascript">
-
-var canvas = n$(document.body).add("canvas"),
-    context = $n(canvas).getContext("2d"),
-    rule = 105,
-    state;
-
-window.addEventListener("resize", resize, false);
-resize();
-
-function resize() {
-  var w = document.body.clientWidth,
-      h = document.body.clientHeight;
-
-  canvas
-      .attr("width", w)
-      .attr("height", h);
-
-  if (state) clearInterval(state.timer);
-
-  state = {
-    data: [],
-    image: context.createImageData(w, 1),
-    timer: setInterval(step, 40),
-    i: 0,
-    w: w,
-    h: h
-  };
-
-  init(rule);
+#mike {
+  background-image: url("http://farm3.static.flickr.com/2740/4512544397_28dec9d08e_b.jpg");
+  background-position: 0% 0%;
+  -webkit-transition: background-position 2s ease;
+  -moz-transition: background-position 2s ease;
 }
 
-function init(x) {
-  rule = x;
-  state.i = 0;
-  for (var j = 0; j < state.w; j++) {
-    state.image.data[4 * j] = 255;
-    state.image.data[4 * j + 1] = 255;
-    state.image.data[4 * j + 2] = 255;
-    state.image.data[4 * j + 3] = 255;
-    state.data[j] = ~~(Math.random() * 2);
-  }
+#mike:hover {
+  background-position: 100% 75%;
 }
 
-function step() {
-  context.putImageData(state.image, 0, state.i);
+</style>
 
-  if (state.i++ >= state.h) {
-    init(~~(Math.random() * 256));
-    return;
-  }
-
-  var p = state.data.slice();
-  for (var j = 0; j < state.w; j++) {
-    state.image.data[4 * j + 0]
-        = state.image.data[4 * j + 1]
-        = state.image.data[4 * j + 2]
-        = 255 * (state.data[j]
-        = (rule >> (p[j - 1] << 2 | p[j] << 1 | p[j + 1])) & 1);
-  }
-}
-
-    </script>
-  </body>
-</html>
+<a class="section" id="mike" href="/mike">
+  <div>Mike</div>
+</a>
